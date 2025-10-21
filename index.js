@@ -44,6 +44,14 @@ wss.on("connection", (socket) => {
                     }));
                 }
             }
+            else if (message.type === "foreward_message") {
+                const targetSocket = userIDToSocket.get(message.targetUserID);
+                targetSocket.send(JSON.stringify({
+                    type: "forewarded_message",
+                    message: message.content,
+                    fromUserId: message.userID
+                }));
+            }
         }
         catch (error) {
             console.error("Failed to parse message:", error);
