@@ -46,6 +46,7 @@ wss.on("connection", (socket) => {
             }
             else if (message.type === "foreward_message") {
                 const targetSocket = userIDToSocket.get(message.targetUserID);
+                console.log(message);
                 targetSocket.send(JSON.stringify({
                     type: "forewarded_message",
                     message: message.content,
